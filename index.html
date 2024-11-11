@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Sederhana</title>
+    <title>Deep Link Demo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 50px;
+            margin-top: 50px;
         }
         button {
             padding: 10px 20px;
@@ -26,11 +26,26 @@
 </head>
 <body>
 
-    <h1>Selamat Datang di Halaman Sederhana</h1>
-    <p>Klik tombol di bawah untuk membuka aplikasi:</p>
-    <button onclick="window.location.href = 'openapp://com.hibank.mobile/';">
-        Buka Aplikasi HiBank
-    </button>
+    <h1>Deep Link ke Aplikasi</h1>
+    <p>Klik tombol di bawah untuk membuka aplikasi HiBank.</p>
+    
+    <!-- Button to trigger deep link -->
+    <button onclick="openDeepLink()">Buka Aplikasi HiBank</button>
+
+    <script>
+        function openDeepLink() {
+            // Menentukan deep link
+            var deepLink = "openapp://com.hibank.mobile/";
+
+            // Mencoba membuka aplikasi dengan deep link
+            window.location.href = deepLink;
+
+            // Jika aplikasi tidak terbuka, Anda dapat melakukan fallback ke URL lain (misalnya, halaman web atau app store)
+            setTimeout(function() {
+                window.location.href = "https://play.google.com/store/apps/details?id=com.hibank.mobile"; // fallback ke Play Store
+            }, 1000);  // Timeout selama 1 detik
+        }
+    </script>
 
 </body>
 </html>
