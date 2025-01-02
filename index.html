@@ -33,20 +33,64 @@
     <button onclick="openDeepLink()">Buka Aplikasi HiBank</button>
 
     <script>
-        function openDeepLink() {
             // Menentukan deep link
             // var deepLink = "openapp://com.hibank.mobile/";
             // var deepLink = "openapp://com.example.hibank/whitelist-registration";
-            var deepLink = "https://hibank.co.id/deeplink/?name=home"
+         
+		var endpoint = getQueryParamName('name')
+	    var deepLink = "openapp://com.example.hibank/"+ endpoint;
+		
+	    const playStore = 'https://play.google.com/store/apps/details?id=com.hibank.mobile';
+		const appStore = 'https://apps.apple.com/id/app/hi-by-hibank/id6474590911?l=id';
 
-            // Mencoba membuka aplikasi dengan deep link
-            window.location.href = deepLink;
+	    function openDeepLink() {
+	        setTimeout(function () {
+	            const userOs = getMobileOS();
+	            if (userOs == "Apple") {
+	                window.location.replace(appStore);
+	            } else {
+	                window.location.replace(playStore);
+	            }
+	        }, 1000);
+
+	        window.location.replace(deepLink);
+	    }
+
+		const getMobileOS = () => {
+		 	var userAgent = window.navigator.userAgent,
+		     	platform = window.navigator.platform,
+		     	macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+		      	windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+		      	iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+		      	os = "Other";
+
+			if (macosPlatforms.indexOf(platform) !== -1) {
+				os = 'Apple';
+			} else if (iosPlatforms.indexOf(platform) !== -1) {
+			    os = 'Apple';
+			} else if (windowsPlatforms.indexOf(platform) !== -1) {
+			    os = 'Windows';
+			} else if (/Android/.test(userAgent)) {
+			    os = 'Android';
+			} else if (!os && /Linux/.test(platform)) {
+			    os = 'Linux';
+			}
+
+		 	return os;
+		}
+
+		// Mendapatkan query parameter dari URL
+		function getQueryParamName(name) {
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			return urlParams.get(name);
+		}
 
             // Jika aplikasi tidak terbuka, Anda dapat melakukan fallback ke URL lain (misalnya, halaman web atau app store)
             // setTimeout(function() {
             //     window.location.href = "https://play.google.com/store/apps/details?id=com.hibank.mobile"; // fallback ke Play Store
             // }, 1000);  // Timeout selama 1 detik
-        }
+   
     </script>
 
 </body>
