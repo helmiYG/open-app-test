@@ -1,47 +1,19 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Link Demo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Deep Link ke Aplikasi</h1>
-    <p>Klik tombol di bawah untuk membuka aplikasi HiBank.</p>
-    
-    <!-- Button to trigger deep link -->
-    <button onclick="openDeepLink()">Buka Aplikasi HiBank</button>
-
+    <meta property="al:android:url" content="openapp://com.hibank.mobile.sit">
+	<meta property="al:android:url" content="openapp://com.hibank.mobile.uat">
+    <meta property="al:ios:url" content="openapp://com.hibank.mobile.sit">
+	<meta property="al:ios:url" content="openapp://com.hibank.mobile.uat">
+    <title>Hibank App</title>
     <script>
-            // Menentukan deep link
-            // var deepLink = "openapp://com.hibank.mobile/";
-            // var deepLink = "openapp://com.example.hibank/whitelist-registration";
-         
 		var endpoint = getQueryParamName('name')
-	    var deepLink = "openapp://com.example.hibank/?name=home";
+	    var deepLink = "openapp://com.hibank.mobile.uat/"+ endpoint;
 		
-	    const playStore = 'https://play.google.com/store/apps/details?id=com.hibank.mobile';
-		const appStore = 'https://apps.apple.com/id/app/hi-by-hibank/id6474590911?l=id';
+	    const playStore = 'https://play.google.com/store/apps/details?id=com.mayora.mobilebanking';
+		const appStore = 'https://apps.apple.com/id/app/mobile-banking-bank-mayora/id1459504798?|=id';
 
 	    function openDeepLink() {
 	        setTimeout(function () {
@@ -51,7 +23,7 @@
 	            } else {
 	                window.location.replace(playStore);
 	            }
-	        }, 1000);
+	        }, 5000);
 
 	        window.location.replace(deepLink);
 	    }
@@ -86,12 +58,11 @@
 			return urlParams.get(name);
 		}
 
-            // Jika aplikasi tidak terbuka, Anda dapat melakukan fallback ke URL lain (misalnya, halaman web atau app store)
-            // setTimeout(function() {
-            //     window.location.href = "https://play.google.com/store/apps/details?id=com.hibank.mobile"; // fallback ke Play Store
-            // }, 1000);  // Timeout selama 1 detik
-   
-    </script>
+	    openDeepLink();
+	</script>
 
+</head>
+<body>
+    <h1>Hibank</h1>
 </body>
 </html>
